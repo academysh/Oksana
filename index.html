@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oksana's Practice — Headway Elementary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:   #C0392B;
+      --ps:    #2563EB;  --ps-lt: #EFF6FF;
+      --tb:    #7C3AED;  --tb-lt: #F5F3FF;
+      --pr:    #D97706;  --pr-lt: #FFFBEB;
+      --pp:    #0F766E;  --pp-lt: #F0FDFA;
+      --text:  #1e293b;
+      --muted: #64748b;
+      --border:#e2e8f0;
+      --bg:    #f8fafc;
+    }
+
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--red);
+      color: #fff;
+      padding: 0 24px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,.20);
+    }
+    .logo { font-size: 15px; font-weight: 700; letter-spacing: .3px; line-height: 1.3; }
+    .logo-sub {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px; font-weight: 600;
+      opacity: .88;
+      letter-spacing: .4px;
+    }
+    .level-badge {
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px; font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero { text-align: center; padding: 52px 24px 36px; }
+
+    .hero-book {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      width: 68px; height: 68px;
+      border-radius: 16px;
+      font-size: 36px; line-height: 68px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(192,57,43,.35);
+    }
+
+    /* Quote block */
+    .quote-block { max-width: 540px; margin: 0 auto; }
+    .quote-text {
+      font-size: clamp(17px, 2.5vw, 21px);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .quote-author {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pr);
+      font-style: normal;
+    }
+    .quote-ru {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 8px;
+      line-height: 1.45;
+    }
+
+    /* ── GRID ── */
+    .section-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      border: 2px solid var(--border);
+      padding: 26px 22px 20px;
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column; gap: 12px;
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 5px; border-radius: 14px 14px 0 0;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.10); }
+
+    .card-ps  { border-color: #bfdbfe; } .card-ps::before  { background: var(--ps); } .card-ps:hover  { border-color: var(--ps); }
+    .card-tb  { border-color: #ddd6fe; } .card-tb::before  { background: var(--tb); } .card-tb:hover  { border-color: var(--tb); }
+    .card-pr  { border-color: #fde68a; } .card-pr::before  { background: var(--pr); } .card-pr:hover  { border-color: var(--pr); }
+    .card-pp  { border-color: #99f6e4; } .card-pp::before  { background: var(--pp); } .card-pp:hover  { border-color: var(--pp); }
+
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .icon-ps { background: var(--ps-lt); }
+    .icon-tb { background: var(--tb-lt); }
+    .icon-pr { background: var(--pr-lt); }
+    .icon-pp { background: var(--pp-lt); }
+
+    .card-title { font-size: 17px; font-weight: 700; line-height: 1.2; }
+    .card-desc  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .card-meta {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: auto; padding-top: 4px;
+    }
+    .tag {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 20px; font-size: 12px; font-weight: 600;
+    }
+    .tag-ps { background: var(--ps-lt); color: var(--ps); }
+    .tag-tb { background: var(--tb-lt); color: var(--tb); }
+    .tag-pr { background: var(--pr-lt); color: var(--pr); }
+    .tag-pp { background: var(--pp-lt); color: var(--pp); }
+
+    .card-arrow {
+      margin-left: auto; font-size: 20px; opacity: .3;
+      transition: opacity .15s, transform .15s;
+    }
+    .card:hover .card-arrow { opacity: 1; transform: translateX(4px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 20px 24px 32px;
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 480px) {
+      .hero  { padding: 36px 16px 24px; }
+      .grid  { padding: 0 16px 40px; gap: 14px; }
+      .card  { padding: 20px 16px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    Headway 5th edition — Elementary
+    <span class="logo-sub">Oksana's Practice</span>
+  </div>
+  <div class="level-badge">A1 → A2</div>
+</header>
+
+<section class="hero">
+  <div class="hero-book">📚</div>
+  <div class="quote-block">
+    <div class="quote-text" id="quote-text">&ldquo;&rdquo;</div>
+    <div class="quote-author" id="quote-author"></div>
+    <div class="quote-ru" id="quote-ru"></div>
+  </div>
+</section>
+
+<p class="section-label">Choose a Block to Practice</p>
+
+<div class="grid">
+
+  <a class="card card-ps" href="present-simple.html">
+    <div class="card-icon icon-ps">🟦</div>
+    <div>
+      <div class="card-title">Present Simple</div>
+      <div class="card-desc">
+        Affirmative, negative and interrogative forms.<br>
+        Verbs from Headway Elementary units.
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-ps">300 sentences</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card card-tb" href="to-be.html">
+    <div class="card-icon icon-tb">🟣</div>
+    <div>
+      <div class="card-title">To Be — Present</div>
+      <div class="card-desc">
+        am / is / are in all forms.<br>
+        Jobs, descriptions, locations and states.
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-tb">300 sentences</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card card-pr" href="pronouns.html">
+    <div class="card-icon icon-pr">🟡</div>
+    <div>
+      <div class="card-title">Pronouns</div>
+      <div class="card-desc">
+        Subject, object, possessive adjectives and pronouns.<br>
+        Dialogues and everyday contexts.
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-pr">450 sentences</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card card-pp" href="prepositions-place.html">
+    <div class="card-icon icon-pp">🟢</div>
+    <div>
+      <div class="card-title">Prepositions of Place</div>
+      <div class="card-desc">
+        in / on / at / above / under / behind / in front of / across.<br>
+        Location and position. Russian translation included.
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-pp">198 sentences</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card card-pp" href="prepositions-time.html">
+    <div class="card-icon icon-pp">🕐</div>
+    <div>
+      <div class="card-title">Prepositions of Time</div>
+      <div class="card-desc">
+        in / on / at + time adverbs: yesterday, last night, ago…<br>
+        Time expressions. Russian translation included.
+      </div>
+    </div>
+    <div class="card-meta">
+      <span class="tag tag-pp">120 sentences</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+</div>
+
+<footer>Headway Elementary 5th edition &middot; Grammar Practice &middot; Oxford University Press</footer>
+
+<script>
+const QUOTES = [
+  { text: "Language is the road map of a culture.", author: "Rita Mae Brown", ru: "Язык — это карта культуры." },
+  { text: "One language sets you in a corridor for life. Two languages open every door along the way.", author: "Frank Smith", ru: "Один язык — и ты в коридоре на всю жизнь. Два языка — и перед тобой открываются все двери." },
+  { text: "To learn a language is to have one more window from which to look at the world.", author: "Chinese Proverb", ru: "Выучить язык — значит открыть ещё одно окно в мир." },
+  { text: "The limits of my language mean the limits of my world.", author: "Ludwig Wittgenstein", ru: "Границы моего языка — это границы моего мира." },
+  { text: "Learning another language is not only learning different words for the same things, but learning another way to think about things.", author: "Flora Lewis", ru: "Изучать другой язык — это не просто учить другие слова для тех же вещей, но учиться думать иначе." },
+  { text: "A different language is a different vision of life.", author: "Federico Fellini", ru: "Другой язык — это другой взгляд на жизнь." },
+  { text: "You live a new life for every new language you speak.", author: "Czech Proverb", ru: "Сколько языков ты знаешь — столько раз ты человек." },
+  { text: "Knowledge of languages is the doorway to wisdom.", author: "Roger Bacon", ru: "Знание языков — это врата в мудрость." },
+  { text: "To speak a language is to take on a world, a culture.", author: "Frantz Fanon", ru: "Говорить на языке — значит принять целый мир, целую культуру." },
+  { text: "Language is wine upon the lips.", author: "Virginia Woolf", ru: "Язык — это вино на губах." },
+  { text: "Practice makes perfect.", author: "Unknown", ru: "Повторение — мать учения." },
+  { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius", ru: "Неважно, как медленно ты идёшь, главное — не останавливаться." },
+  { text: "The beautiful thing about learning is that no one can take it away from you.", author: "B.B. King", ru: "Прекрасное в учёбе то, что никто не может отнять у тебя знания." },
+  { text: "Small daily improvements are the key to staggering long-term results.", author: "Unknown", ru: "Маленькие ежедневные улучшения — ключ к удивительным долгосрочным результатам." },
+  { text: "An investment in knowledge pays the best interest.", author: "Benjamin Franklin", ru: "Вложение в знания приносит наибольшие проценты." },
+  { text: "Every language is a world. Without translation, we would inhabit parishes bordering on silence.", author: "George Steiner", ru: "Каждый язык — это целый мир. Без перевода мы жили бы в приходах, граничащих с тишиной." },
+  { text: "Grammar is the logic of speech, even as logic is the grammar of reason.", author: "Richard C. Trench", ru: "Грамматика — это логика речи, так же как логика — это грамматика разума." },
+  { text: "The more that you read, the more things you will know.", author: "Dr. Seuss", ru: "Чем больше читаешь, тем больше знаешь." },
+  { text: "Live as if you were to die tomorrow. Learn as if you were to live forever.", author: "Mahatma Gandhi", ru: "Живи так, словно умрёшь завтра. Учись так, словно будешь жить вечно." },
+];
+(function () {
+  const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  document.getElementById('quote-text').textContent = '"' + q.text + '"';
+  document.getElementById('quote-author').textContent = '(' + q.author + ')';
+  document.getElementById('quote-ru').textContent = q.ru;
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prepositions of Time — Headway Elementary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --hw-red: #C0392B; --hw-red-dark: #962d22;
+    --bg: #ECEEF8; --surface: #ffffff; --surface2: #F7F9FF;
+    --accent: #4361EE; --accent-light: #E8ECFD; --accent-dark: #2d4bcc;
+    --purple: #7c3aed; --orange: #d97706;
+    --green: #2D9E6B; --green-bg: #E6F7EF; --green-border: #A8DBBF;
+    --red: #D63B3B; --red-bg: #FDEAEA; --red-border: #F0AAAA;
+    --text: #1A1D2E; --muted: #6B7080; --muted2: #a0a8bf;
+    --border: #DDE2F0; --radius: 12px;
+    --shadow-card: 0 2px 10px rgba(30,40,100,0.07);
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--hw-red); padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0; position: sticky; top: 0; z-index: 10;
+    box-shadow: 0 3px 16px rgba(192,57,43,0.4); min-height: 58px;
+  }
+  .logo { font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800; color: #fff; line-height: 1.2; padding: 13px 0; }
+  .logo-sub { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.68); letter-spacing: 0.7px; text-transform: uppercase; display: block; margin-top: 2px; }
+  .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 0; }
+  .round-badge { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 500; }
+  .score-chips { display: flex; gap: 6px; }
+  .chip { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+  .chip-ok  { background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+  .chip-err { background: rgba(0,0,0,0.18); color: #fff; border: 1px solid rgba(0,0,0,0.2); }
+
+  /* ── CONTROL STRIP (topic + rule accordion together) ── */
+  .control-strip-sticky {
+    position: sticky; top: 58px; z-index: 9;
+    background: var(--bg);
+    box-shadow: 0 2px 8px rgba(30,40,100,0.08);
+    padding-bottom: 4px;
+  }
+  .control-strip {
+    max-width: 860px; margin: 0 auto; padding: 14px 18px 0;
+  }
+
+  /* Topic card */
+  .topic-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  .topic-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 18px;
+  }
+  .filter-label { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ftog {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 6px 16px; border-radius: 20px; cursor: pointer;
+    border: 1.5px solid var(--border); background: var(--surface2);
+    color: var(--muted); transition: all 0.15s; user-select: none;
+  }
+  .ftog:hover { border-color: var(--accent); color: var(--accent); }
+  .ftog.on-ps   { background: var(--accent);  border-color: var(--accent);  color: #fff; }
+  .ftog.on-tobe { background: var(--purple);  border-color: var(--purple);  color: #fff; }
+  .ftog.on-pron { background: var(--orange);  border-color: var(--orange);  color: #fff; }
+  .ftog.on-prep { background: #0f766e; border-color: #0f766e; color: #fff; }
+
+  /* Rule pills — same shape as topic pills, teal/green color */
+  .rtog {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 6px 16px; border-radius: 20px; cursor: pointer;
+    border: 1.5px solid var(--border); background: var(--surface2);
+    color: var(--muted); transition: all 0.15s; user-select: none;
+  }
+  .rtog:hover { border-color: #0d9488; color: #0d9488; }
+  .rtog.open  { background: #0d9488; border-color: #0d9488; color: #fff; }
+
+  /* Rule accordion — sits inside topic-card, separated by hairline */
+  .rule-row {
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 18px; background: var(--surface2);
+  }
+
+  .hint-body {
+    display: none; padding: 18px 18px 16px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    animation: fadeIn 0.2s ease;
+  }
+  .hint-body.open { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+  /* Scheme tables */
+  .scheme { font-size: 13.5px; line-height: 1.6; }
+  .scheme h3 {
+    font-size: 11.5px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.7px;
+    margin: 16px 0 6px; padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .scheme h3:first-child { margin-top: 0; }
+  .stbl { border-collapse: collapse; width: 100%; margin-bottom: 4px; }
+  .stbl th { background: #eef1fd; color: var(--accent-dark); font-size: 11.5px; font-weight: 700; text-align: left; padding: 6px 10px; border: 1px solid #d4daee; text-transform: uppercase; letter-spacing: 0.4px; }
+  .stbl td { padding: 6px 10px; border: 1px solid var(--border); color: var(--text); vertical-align: top; font-size: 13.5px; }
+  .stbl td code { background: var(--accent-light); color: var(--accent-dark); border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 13px; }
+  .stbl tr:nth-child(even) td { background: #fafbff; }
+  .stbl.pron-tbl th { background: #fff3d6; color: #92540a; border-color: #f5d98b; }
+  .stbl.pron-tbl td code { background: #fff8eb; color: #92540a; }
+  .stbl.tobe-tbl th { background: #ede9ff; color: #5b21b6; border-color: #c4b5fd; }
+  .stbl.tobe-tbl td code { background: #f5f0ff; color: #5b21b6; }
+  .formula {
+    display: inline-block; background: #eef1fd; border: 1px solid #c7d0f5;
+    border-radius: 7px; padding: 7px 14px; font-size: 13.5px; margin: 4px 0 10px; color: var(--text);
+  }
+  .formula code { color: var(--accent-dark); font-family: monospace; font-weight: 700; }
+  .close-btn {
+    margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface2);
+    padding: 5px 14px; border-radius: 20px; transition: all 0.15s;
+  }
+  .close-btn:hover { color: var(--hw-red); border-color: var(--hw-red); }
+
+  /* ── MAIN / EXERCISES ── */
+  main { max-width: 860px; margin: 0 auto; padding: 20px 18px 60px; }
+
+  /* Exercises wrapper card */
+  .exercises-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: 20px 20px 10px;
+    margin-bottom: 16px;
+  }
+
+  .progress-track { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 18px; overflow: hidden; }
+  .progress-fill  { height: 100%; background: linear-gradient(90deg, var(--hw-red), #e07060); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+  /* Individual sentence cards */
+  .sentence-card {
+    border: 1px solid var(--border); border-radius: 9px;
+    padding: 12px 14px 12px 16px; margin-bottom: 8px;
+    display: flex; align-items: flex-start; gap: 12px;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--surface2);
+  }
+  .sentence-card:last-child { margin-bottom: 0; }
+  .sentence-card.checked-ok  { border-color: var(--green-border); background: var(--green-bg); }
+  .sentence-card.checked-err { border-color: var(--red-border);   background: var(--red-bg); }
+  .num { font-size: 12px; font-weight: 600; color: var(--muted); min-width: 22px; text-align: right; padding-top: 5px; flex-shrink: 0; }
+  .card-body { flex: 1; min-width: 0; }
+
+  .sent-line { font-size: 15px; line-height: 2.1; display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .sent-line .word { white-space: nowrap; }
+  .dialogue { font-size: 15px; line-height: 2.1; display: flex; flex-direction: column; gap: 0; }
+  .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; }
+  .dl .word { white-space: nowrap; }
+  .sp-label { font-weight: 700; color: var(--muted); margin-right: 3px; white-space: nowrap; }
+
+  input.gap {
+    border: none; border-bottom: 2px solid var(--accent);
+    background: var(--accent-light); color: var(--accent-dark);
+    font-size: 15px; font-family: 'Inter', sans-serif; font-weight: 600;
+    padding: 1px 8px; border-radius: 5px 5px 0 0; outline: none;
+    transition: border-color 0.15s, background 0.15s; text-align: center; vertical-align: middle;
+  }
+  input.gap::placeholder { color: #a0aad0; font-weight: 400; font-size: 13px; }
+  input.gap:focus { border-bottom-color: var(--accent-dark); background: #dce3fc; }
+  input.gap.correct { border-bottom-color: var(--green); background: #d0f0e2; color: #1a6e48; }
+  input.gap.wrong   { border-bottom-color: var(--red);   background: #fce0e0; color: var(--red); }
+  input.gap:disabled { opacity: 1; cursor: default; }
+
+  .meta-line { margin-top: 3px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 13px; }
+  .hint-base { color: var(--muted); }
+  .hint-ru   { color: var(--muted2); font-style: italic; }
+  .correction { color: var(--red); font-weight: 600; font-size: 12.5px; display: none; }
+
+  .btn-check-card {
+    flex-shrink: 0; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    padding: 5px 14px; border-radius: 20px; border: 1px solid var(--accent);
+    background: var(--accent-light); color: var(--accent); cursor: pointer;
+    transition: background 0.15s; white-space: nowrap; margin-top: 2px;
+  }
+  .btn-check-card:hover:not(:disabled) { background: #d0d9fb; }
+  .btn-check-card:disabled { opacity: 0.35; cursor: default; }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  button.btn-main {
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+    border-radius: 9px; padding: 10px 22px; cursor: pointer; border: none;
+    transition: background 0.15s, transform 0.1s;
+  }
+  button.btn-main:active { transform: scale(0.97); }
+  .btn-check-all { background: var(--hw-red); color: #fff; }
+  .btn-check-all:hover { background: var(--hw-red-dark); }
+  .btn-next { background: var(--surface2); color: var(--text); border: 1.5px solid var(--border) !important; }
+  .btn-next:hover { background: #e8eaf5; }
+
+  .result-box { margin-top: 14px; padding: 12px 16px; border-radius: 9px; font-size: 14px; font-weight: 500; display: none; border: 1px solid transparent; }
+  .result-box.show  { display: block; }
+  .result-box.great { background: var(--green-bg); border-color: var(--green-border); color: #1a6e48; }
+  .result-box.ok    { background: #FFF8E6; border-color: #F5D98B; color: #7a5500; }
+  .result-box.poor  { background: var(--red-bg); border-color: var(--red-border); color: #a52a2a; }
+  .empty-msg { text-align: center; padding: 48px 20px; color: var(--muted); font-size: 15px; }
+  footer { text-align: center; padding: 24px; font-size: 12px; color: var(--muted); }
+
+  /* Translation line under preposition sentences */
+  .sent-translation {
+    font-size: 13px; color: var(--muted); margin-top: 2px;
+    line-height: 1.5; font-style: italic;
+  }
+  .sent-translation mark {
+    background: none; color: var(--accent-dark);
+    font-weight: 700; font-style: normal;
+  }
+
+
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px;
+  background: #fff; color: #C0392B;
+  border: 2px solid #C0392B; border-radius: 8px; cursor: pointer;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.back-btn:hover { background: #C0392B; color: #fff; }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    Headway 5th edition — Elementary
+    <span class="logo-sub">Oksana’s Practice</span>
+  </div>
+  <div class="header-right">
+    <span class="round-badge">Round <strong id="round-num">1</strong></span>
+    <div class="score-chips">
+      <span class="chip chip-ok"  id="chip-ok">✓ 0</span>
+      <span class="chip chip-err" id="chip-err">✗ 0</span>
+    </div>
+  </div>
+</header>
+
+<div class="control-strip-sticky"><div class="control-strip">
+  <div class="topic-card">
+    <div class="topic-row" style="justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <a href="index.html" class="back-btn">← Back</a>
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <span class="filter-label" style="font-size:16px; font-weight:700; color:#222;">Prepositions of Time</span>
+        <button class="rtog" id="ht-prep" onclick="toggleHint('prep')" style="border-color:#0F766E; color:#0F766E;">📖 Rule</button>
+      </div>
+    </div>
+
+    <div id="hb-prep" class="hint-body">
+      <div class="scheme">
+        <h3>Prepositions of time: in / on / at</h3>
+        <table class="stbl">
+          <tr style="background:#e6faf5"><th style="color:#0f766e;border-color:#99e6d8">Preposition</th><th style="color:#0f766e;border-color:#99e6d8">Use</th><th style="color:#0f766e;border-color:#99e6d8">Example</th></tr>
+          <tr><td><code>in</code></td><td>months, seasons, years, parts of day</td><td><code><b>in</b> January / summer / the morning</code></td></tr>
+          <tr><td><code>on</code></td><td>days, dates</td><td><code><b>on</b> Monday / 5th May / the weekend</code></td></tr>
+          <tr><td><code>at</code></td><td>clock time, night, noon</td><td><code><b>at</b> 7 o’clock / noon / night</code></td></tr>
+        </table>
+        <h3>Time adverbs — NO preposition! Type “–” or leave empty</h3>
+        <table class="stbl">
+          <tr style="background:#e6faf5"><th style="color:#0f766e;border-color:#99e6d8">Expression</th><th style="color:#0f766e;border-color:#99e6d8">Example</th></tr>
+          <tr><td><code>yesterday</code> / <code>yesterday morning</code></td><td><code>I saw her <b>yesterday</b>.</code></td></tr>
+          <tr><td><code>last night</code> / <code>last week</code> / <code>last year</code></td><td><code>We met <b>last Saturday</b>.</code></td></tr>
+          <tr><td><code>this morning</code> / <code>this afternoon</code> / <code>this week</code></td><td><code>He called <b>this morning</b>.</code></td></tr>
+          <tr><td><code>... ago</code> (two days ago, a year ago)</td><td><code>She arrived <b>three days ago</b>.</code></td></tr>
+        </table>
+        <h3>Quick guide</h3>
+        <table class="stbl">
+          <tr style="background:#e6faf5"><th style="color:#0f766e;border-color:#99e6d8">in</th><th style="color:#0f766e;border-color:#99e6d8">on</th><th style="color:#0f766e;border-color:#99e6d8">at</th><th style="color:#0f766e;border-color:#99e6d8">no preposition</th></tr>
+          <tr><td><code>in</code> the morning</td><td><code>on</code> Monday morning</td><td><code>at</code> 8 o’clock</td><td><code>this</code> morning</td></tr>
+          <tr><td><code>in</code> January</td><td><code>on</code> 1st January</td><td><code>at</code> midnight</td><td><code>yesterday</code> / <code>last</code> night</td></tr>
+          <tr><td><code>in</code> summer</td><td><code>on</code> the weekend</td><td><code>at</code> noon</td><td><code>two days</code> ago</td></tr>
+        </table>
+      </div>
+      <div class="close-btn" onclick="closeHint('prep')">✕ Close</div>
+    </div>
+    </div>
+  </div>
+</div></div>
+
+<main>
+  <div class="exercises-card">
+    <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+    <div id="container"></div>
+    <div class="actions">
+      <button class="btn-main btn-check-all" onclick="checkAll()">Check All</button>
+      <button class="btn-main btn-next"      onclick="newRound()">New Round ↻</button>
+    </div>
+    <div class="result-box" id="result"></div>
+  </div>
+</main>
+
+<footer>Headway Elementary 5th edition · Grammar Practice · <a href="index.html" style="color:inherit;text-decoration:underline;">← Home</a></footer>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────
+const DB = [];
+function t(v){return{k:'t',v};}
+function g(a,w){return{k:'g',a:Array.isArray(a)?a:[a],w};}
+function pp(parts,hint,tr,trMark){ DB.push({bank:'prep', parts, hint, tr, trMark}); }
+function dl(speakers, hint, bank, tr, trMark){
+  const lines = Object.entries(speakers).map(([sp,parts])=>({speaker:sp,parts}));
+  DB.push({bank, dialogue:true, lines, hint, tr, trMark});
+}
+
+// ══ PREPOSITIONS — TIME (+40 aff / +40 neg / +40 int) ══
+// ── TIME AFF (40) ──
+pp([t(`I always drink coffee `),g(`in`,46),t(` the morning.`)],'(in)','Я всегда пью кофе по утрам.','по утрам');
+pp([t(`She goes to the gym `),g(`in`,46),t(` the evening.`)],'(in)','Она ходит в спортзал вечером.','вечером');
+pp([t(`They travel abroad `),g(`in`,46),t(` summer.`)],'(in)','Они путешествуют за границей летом.','летом');
+pp([t(`He was born `),g(`in`,46),t(` January.`)],'(in)','Он родился в январе.','в январе');
+pp([t(`The course starts `),g(`in`,46),t(` September.`)],'(in)','Курс начинается в сентябре.','в сентябре');
+pp([t(`We usually relax `),g(`in`,46),t(` the afternoon.`)],'(in)','Мы обычно отдыхаем во второй половине дня.','во второй');
+pp([t(`Flowers bloom `),g(`in`,46),t(` spring.`)],'(in)','Цветы расцветают весной.','весной');
+pp([t(`It gets very cold here `),g(`in`,46),t(` winter.`)],'(in)','Здесь становится очень холодно зимой.','зимой');
+pp([t(`The festival takes place `),g(`in`,46),t(` July.`)],'(in)','Фестиваль проходит в июле.','в июле');
+pp([t(`She reads before bed `),g(`in`,46),t(` the evening.`)],'(in)','Она читает перед сном по вечерам.','по вечерам');
+pp([t(`He plays football `),g(`on`,52),t(` Saturdays.`)],'(on)','Он играет в футбол по субботам.','по субботам');
+pp([t(`We have a team meeting `),g(`on`,52),t(` Monday mornings.`)],'(on)','У нас собрание команды по понедельникам утром.','по понедельникам');
+pp([t(`She visits her parents `),g(`on`,52),t(` Sundays.`)],'(on)','Она навещает родителей по воскресеньям.','по воскресеньям');
+pp([t(`The market is open `),g(`on`,52),t(` Saturdays and Sundays.`)],'(on)','Рынок открыт по субботам и воскресеньям.','по субботам');
+pp([t(`His birthday is `),g(`on`,52),t(` the fifteenth of March.`)],'(on)','Его день рождения пятнадцатого марта.','пятнадцатого');
+pp([t(`The deadline is `),g(`on`,52),t(` Friday.`)],'(on)','Дедлайн в пятницу.','в пятницу');
+pp([t(`We go to church `),g(`on`,52),t(` Sunday mornings.`)],'(on)','Мы ходим в церковь по воскресным утрам.','по воскресным');
+pp([t(`They always go out `),g(`on`,52),t(` Friday evenings.`)],'(on)','Они всегда куда-нибудь выходят по пятничным вечерам.','по пятничным');
+pp([t(`The concert is `),g(`on`,52),t(` the twenty-second of June.`)],'(on)','Концерт двадцать второго июня.','двадцать второго');
+pp([t(`She started her new job `),g(`on`,52),t(` Monday.`)],'(on)','Она вышла на новую работу в понедельник.','в понедельник');
+pp([t(`The lesson starts `),g(`at`,46),t(` nine o'clock.`)],'(at)','Урок начинается в девять часов.','в девять');
+pp([t(`We have lunch `),g(`at`,46),t(` noon every day.`)],'(at)','Мы обедаем в полдень каждый день.','в полдень');
+pp([t(`She goes to sleep `),g(`at`,46),t(` midnight.`)],'(at)','Она ложится спать в полночь.','в полночь');
+pp([t(`The film starts `),g(`at`,46),t(` seven thirty.`)],'(at)','Фильм начинается в половине восьмого.','в половине');
+pp([t(`He wakes up `),g(`at`,46),t(` six every morning.`)],'(at)','Он просыпается в шесть каждое утро.','в шесть');
+pp([t(`The shop closes `),g(`at`,46),t(` nine in the evening.`)],'(at)','Магазин закрывается в девять вечера.','в девять');
+pp([t(`She calls her mother `),g(`at`,46),t(` eight every Sunday.`)],'(at)','Она звонит маме в восемь каждое воскресенье.','в восемь');
+pp([t(`The train departs `),g(`at`,46),t(` quarter past seven.`)],'(at)','Поезд отправляется в четверть восьмого.','в четверть');
+pp([t(`We finish work `),g(`at`,46),t(` half past five.`)],'(at)','Мы заканчиваем работу в половине шестого.','в половине');
+pp([t(`The meeting is `),g(`at`,46),t(` three o'clock this afternoon.`)],'(at)','Встреча в три часа дня.','в три');
+// ── TIME NEG (40) ──
+pp([t(`I don't drink coffee `),g(`in`,46),t(` the evening — it keeps me awake.`)],'(in)','Я не пью кофе по вечерам — от него не сплю.','по вечерам');
+pp([t(`She doesn't work `),g(`in`,46),t(` the morning — her shift starts at noon.`)],'(in)','Она не работает по утрам — её смена начинается в полдень.','по утрам');
+pp([t(`They don't travel `),g(`in`,46),t(` winter — they prefer warmer months.`)],'(in)','Они не путешествуют зимой — предпочитают тёплые месяцы.','зимой');
+pp([t(`He doesn't have classes `),g(`in`,46),t(` July — it's the summer holiday.`)],'(in)','У него нет занятий в июле — летние каникулы.','в июле');
+pp([t(`We don't go skiing `),g(`in`,46),t(` summer — there's no snow!`)],'(in)','Мы не катаемся на лыжах летом — нет снега!','летом');
+pp([t(`She doesn't exercise `),g(`in`,46),t(` the morning — she prefers evenings.`)],'(in)','Она не занимается спортом по утрам — предпочитает вечера.','по утрам');
+pp([t(`They don't go on holiday `),g(`in`,46),t(` January — it's too cold.`)],'(in)','Они не ходят в отпуск в январе — слишком холодно.','в январе');
+pp([t(`He doesn't feel well `),g(`in`,46),t(` the afternoon — he's a morning person.`)],'(in)','Он плохо чувствует себя во второй половине дня — он жаворонок.','во второй');
+pp([t(`We don't use the heating `),g(`in`,46),t(` summer — it's not necessary.`)],'(in)','Мы не включаем отопление летом — это не нужно.','летом');
+pp([t(`She doesn't come home `),g(`in`,46),t(` the afternoon — she has evening classes.`)],'(in)','Она не приходит домой во второй половине дня — у неё вечерние занятия.','во второй');
+pp([t(`He doesn't work `),g(`on`,52),t(` Sundays — it's a family day.`)],'(on)','Он не работает по воскресеньям — это семейный день.','по воскресеньям');
+pp([t(`She doesn't go out `),g(`on`,52),t(` weeknights — she has to get up early.`)],'(on)','Она не выходит по вечерам в будни — надо рано вставать.','по вечерам');
+pp([t(`They don't have lessons `),g(`on`,52),t(` Saturdays.`)],'(on)','У них нет уроков по субботам.','по субботам');
+pp([t(`The office isn't open `),g(`on`,52),t(` public holidays.`)],'(on)','Офис не работает в праздничные дни.','в праздничные');
+pp([t(`We don't have meetings `),g(`on`,52),t(` Fridays — it's a no-meeting day.`)],'(on)','У нас нет совещаний по пятницам — день без встреч.','по пятницам');
+pp([t(`She doesn't visit her parents `),g(`on`,52),t(` weekdays — she's too busy.`)],'(on)','Она не навещает родителей по будням — слишком занята.','по будням');
+pp([t(`The market isn't open `),g(`on`,52),t(` Mondays.`)],'(on)','Рынок не работает по понедельникам.','по понедельникам');
+pp([t(`He doesn't play sport `),g(`on`,52),t(` Wednesdays — that's his rest day.`)],'(on)','Он не занимается спортом по средам — это его день отдыха.','по средам');
+pp([t(`They don't go to the cinema `),g(`on`,52),t(` weeknights.`)],'(on)','Они не ходят в кино по вечерам в будни.','по вечерам');
+pp([t(`I don't check work emails `),g(`on`,52),t(` Saturday or Sunday.`)],'(on)','Я не проверяю рабочую почту по субботам и воскресеньям.','по субботам');
+pp([t(`The café doesn't open `),g(`at`,46),t(` seven — it opens at nine.`)],'(at)','Кафе не открывается в семь — оно открывается в девять.','в семь');
+pp([t(`I don't wake up `),g(`at`,46),t(` six at weekends — I sleep in.`)],'(at)','По выходным я не встаю в шесть — я сплю дольше.','в шесть');
+pp([t(`She doesn't finish work `),g(`at`,46),t(` five — she always stays late.`)],'(at)','Она не заканчивает работу в пять — она всегда задерживается.','в пять');
+pp([t(`He doesn't eat `),g(`at`,46),t(` noon — he has a late lunch.`)],'(at)','Он не ест в полдень — он обедает поздно.','в полдень');
+pp([t(`The bus doesn't leave `),g(`at`,46),t(` eight — it's delayed.`)],'(at)','Автобус не отправляется в восемь — он опаздывает.','в восемь');
+pp([t(`She doesn't go to bed `),g(`at`,46),t(` ten — she's a night owl.`)],'(at)','Она не ложится спать в десять — она сова.','в десять');
+pp([t(`We don't start meetings `),g(`at`,46),t(` nine sharp — usually a bit later.`)],'(at)','Мы не начинаем совещания ровно в девять — обычно чуть позже.','в девять');
+pp([t(`He doesn't arrive `),g(`at`,46),t(` half past eight — he's always late.`)],'(at)','Он не приходит в половине девятого — он всегда опаздывает.','в половине');
+pp([t(`The gym doesn't open `),g(`at`,46),t(` midnight — it closes at ten.`)],'(at)','Спортзал не работает в полночь — он закрывается в десять.','в полночь');
+pp([t(`I don't eat lunch `),g(`at`,46),t(` noon — I'm usually not hungry then.`)],'(at)','Я не обедаю в полдень — обычно не голоден в это время.','в полдень');
+// ── TIME INT (40) ──
+dl({A:[t(`When do you usually wake up?`)], B:[t(`I wake up `),g(`at`,46),t(` six every morning.`)]},'(at)','prep','A: Когда ты обычно просыпаешься?\nB: Я просыпаюсь в шесть каждое утро.','в шесть');
+dl({A:[t(`When does the lesson start?`)], B:[t(`It starts `),g(`at`,46),t(` nine o'clock.`)]},'(at)','prep','A: Когда начинается урок?\nB: Он начинается в девять часов.','в девять');
+dl({A:[t(`When do you have lunch?`)], B:[t(`I usually eat `),g(`at`,46),t(` noon.`)]},'(at)','prep','A: Когда ты обедаешь?\nB: Обычно я ем в полдень.','в полдень');
+dl({A:[t(`When does the film finish?`)], B:[t(`It finishes `),g(`at`,46),t(` half past nine.`)]},'(at)','prep','A: Когда заканчивается фильм?\nB: Он заканчивается в половине десятого.','в половине');
+dl({A:[t(`When does the train leave?`)], B:[t(`It departs `),g(`at`,46),t(` quarter to eight.`)]},'(at)','prep','A: Когда отправляется поезд?\nB: Он отправляется без четверти восемь.','без четверти');
+dl({A:[t(`When does the shop close?`)], B:[t(`It closes `),g(`at`,46),t(` nine in the evening.`)]},'(at)','prep','A: Когда закрывается магазин?\nB: Он закрывается в девять вечера.','в девять');
+dl({A:[t(`When does she finish work?`)], B:[t(`She finishes `),g(`at`,46),t(` five thirty.`)]},'(at)','prep','A: Когда она заканчивает работу?\nB: Она заканчивает в половине шестого.','в половине');
+dl({A:[t(`When does the gym open?`)], B:[t(`It opens `),g(`at`,46),t(` seven in the morning.`)]},'(at)','prep','A: Когда открывается спортзал?\nB: Он открывается в семь утра.','в семь');
+dl({A:[t(`When do you go to bed?`)], B:[t(`I usually go to bed `),g(`at`,46),t(` eleven.`)]},'(at)','prep','A: Когда ты ложишься спать?\nB: Обычно я ложусь в одиннадцать.','в одиннадцать');
+dl({A:[t(`When does the meeting start?`)], B:[t(`It starts `),g(`at`,46),t(` three o'clock.`)]},'(at)','prep','A: Когда начинается встреча?\nB: Она начинается в три часа.','в три');
+dl({A:[t(`When do you play tennis?`)], B:[t(`I play `),g(`on`,52),t(` Saturday mornings.`)]},'(on)','prep','A: Когда ты играешь в теннис?\nB: Я играю по субботним утрам.','по субботним');
+dl({A:[t(`When is the exam?`)], B:[t(`It's `),g(`on`,52),t(` the tenth of May.`)]},'(on)','prep','A: Когда экзамен?\nB: Он десятого мая.','десятого');
+dl({A:[t(`When do you usually rest?`)], B:[t(`We rest `),g(`on`,52),t(` Sundays.`)]},'(on)','prep','A: Когда вы обычно отдыхаете?\nB: Мы отдыхаем по воскресеньям.','по воскресеньям');
+dl({A:[t(`When is the party?`)], B:[t(`It's `),g(`on`,52),t(` Friday evening.`)]},'(on)','prep','A: Когда вечеринка?\nB: В пятницу вечером.','В пятницу');
+dl({A:[t(`Do you work at weekends?`)], B:[t(`I work `),g(`on`,52),t(` Saturdays but not Sundays.`)]},'(on)','prep','A: Ты работаешь по выходным?\nB: Я работаю по субботам, но не по воскресеньям.','по субботам');
+dl({A:[t(`When does the course finish?`)], B:[t(`It finishes `),g(`on`,52),t(` the last Friday of June.`)]},'(on)','prep','A: Когда заканчивается курс?\nB: Он заканчивается в последнюю пятницу июня.','в последнюю');
+dl({A:[t(`When do you see your friends?`)], B:[t(`We usually meet `),g(`on`,52),t(` Friday evenings.`)]},'(on)','prep','A: Когда ты видишься с друзьями?\nB: Мы обычно встречаемся по пятничным вечерам.','по пятничным');
+dl({A:[t(`When is the interview?`)], B:[t(`It's `),g(`on`,52),t(` Thursday at two.`)]},'(on)','prep','A: Когда собеседование?\nB: В четверг в два часа.','В четверг');
+dl({A:[t(`When does he play football?`)], B:[t(`He plays `),g(`on`,52),t(` Wednesday evenings.`)]},'(on)','prep','A: Когда он играет в футбол?\nB: Он играет по средам вечером.','по средам');
+dl({A:[t(`When is her birthday?`)], B:[t(`It's `),g(`on`,52),t(` the third of August.`)]},'(on)','prep','A: Когда у неё день рождения?\nB: Третьего августа.','Третьего');
+dl({A:[t(`What do you do in the morning?`)], B:[t(`I go for a run `),g(`in`,46),t(` the morning.`)]},'(in)','prep','A: Что ты делаешь утром?\nB: Я бегаю по утрам.','по утрам');
+dl({A:[t(`When does she study?`)], B:[t(`She studies `),g(`in`,46),t(` the evening after work.`)]},'(in)','prep','A: Когда она занимается?\nB: Она занимается по вечерам после работы.','по вечерам');
+dl({A:[t(`When do you go on holiday?`)], B:[t(`We usually go `),g(`in`,46),t(` August.`)]},'(in)','prep','A: Когда ты идёшь в отпуск?\nB: Мы обычно едем в августе.','в августе');
+dl({A:[t(`When is it hottest here?`)], B:[t(`It's hottest `),g(`in`,46),t(` July and August.`)]},'(in)','prep','A: Когда здесь самая жара?\nB: Самая жара в июле и августе.','в июле');
+dl({A:[t(`When do the days get longer?`)], B:[t(`They get longer `),g(`in`,46),t(` spring.`)]},'(in)','prep','A: Когда дни становятся длиннее?\nB: Они становятся длиннее весной.','весной');
+dl({A:[t(`When does he feel most productive?`)], B:[t(`He feels best `),g(`in`,46),t(` the morning.`)]},'(in)','prep','A: Когда он наиболее продуктивен?\nB: Лучше всего ему утром.','утром');
+dl({A:[t(`When do they decorate the city?`)], B:[t(`They decorate it `),g(`in`,46),t(` December.`)]},'(in)','prep','A: Когда украшают город?\nB: Его украшают в декабре.','в декабре');
+dl({A:[t(`When does it usually rain here?`)], B:[t(`It usually rains `),g(`in`,46),t(` autumn.`)]},'(in)','prep','A: Когда здесь обычно идут дожди?\nB: Обычно дожди идут осенью.','осенью');
+dl({A:[t(`When do you feel most relaxed?`)], B:[t(`I feel most relaxed `),g(`in`,46),t(` the evening.`)]},'(in)','prep','A: Когда ты чувствуешь себя расслабленно?\nB: Больше всего я расслабляюсь вечером.','вечером');
+dl({A:[t(`When does the academic year start?`)], B:[t(`It starts `),g(`in`,46),t(` September.`)]},'(in)','prep','A: Когда начинается учебный год?\nB: Он начинается в сентябре.','в сентябре');
+
+// ══ NO PREPOSITION — time adverbs (yesterday / last / this / ago) ══
+// Student types  -  or leaves blank. Both are accepted as correct.
+// ── AFF (20) ──
+pp([t(`She called me `),g(['-',''],46),t(` last night.`)],'(no preposition)','Она позвонила мне вчера вечером.','ночью');
+pp([t(`They arrived `),g(['-',''],46),t(` two days ago.`)],'(no preposition)','Они приехали два дня назад.','назад');
+pp([t(`He left `),g(['-',''],46),t(` an hour ago.`)],'(no preposition)','Он ушёл час назад.','назад');
+pp([t(`We visited the museum `),g(['-',''],46),t(` last weekend.`)],'(no preposition)','В прошлые выходные мы посетили музей.','выходные');
+pp([t(`I started this course `),g(['-',''],46),t(` last month.`)],'(no preposition)','В прошлом месяце я начал этот курс.','прошлом');
+pp([t(`She moved to this city `),g(['-',''],46),t(` three years ago.`)],'(no preposition)','Три года назад она переехала в этот город.','назад');
+pp([t(`We met `),g(['-',''],46),t(` this morning at the café.`)],'(no preposition)','Этим утром мы встретились в кафе.','утром');
+pp([t(`He read the news `),g(['-',''],46),t(` this afternoon.`)],'(no preposition)','Сегодня днём он читал новости.','днём');
+pp([t(`They cooked dinner `),g(['-',''],46),t(` last Sunday.`)],'(no preposition)','В прошлое воскресенье они готовили ужин.','воскресенье');
+pp([t(`I bought this jacket `),g(['-',''],46),t(` a week ago.`)],'(no preposition)','Неделю назад я купил эту куртку.','назад');
+pp([t(`She finished work `),g(['-',''],46),t(` this evening.`)],'(no preposition)','Сегодня вечером она закончила работу.','вечером');
+pp([t(`We spoke to him `),g(['-',''],46),t(` yesterday morning.`)],'(no preposition)','Вчера утром мы с ним разговаривали.','утром');
+pp([t(`He learned to drive `),g(['-',''],46),t(` last year.`)],'(no preposition)','В прошлом году он научился водить.','году');
+pp([t(`I lost my phone `),g(['-',''],46),t(` two hours ago.`)],'(no preposition)','Два часа назад я потерял телефон.','назад');
+pp([t(`They travelled to Spain `),g(['-',''],46),t(` last summer.`)],'(no preposition)','Прошлым летом они путешествовали в Испанию.','летом');
+pp([t(`She started the new job `),g(['-',''],46),t(` this week.`)],'(no preposition)','На этой неделе она начала новую работу.','неделе');
+pp([t(`He broke his arm `),g(['-',''],46),t(` a month ago.`)],'(no preposition)','Месяц назад он сломал руку.','назад');
+pp([t(`I saw that film `),g(['-',''],46),t(` last Friday.`)],'(no preposition)','В прошлую пятницу я смотрел этот фильм.','пятницу');
+pp([t(`She woke up very early `),g(['-',''],46),t(` this morning.`)],'(no preposition)','Этим утром она проснулась очень рано.','утром');
+pp([t(`She was late for work `),g(['-',''],46),t(` yesterday.`)],'(no preposition)','Вчера она опоздала на работу.','Вчера');
+
+// ── NEG (15) ──
+pp([t(`I didn't see him `),g(['-',''],46),t(` yesterday.`)],'(no preposition)','Вчера я его не видел.','Вчера');
+pp([t(`She didn't sleep well `),g(['-',''],46),t(` last night.`)],'(no preposition)','Прошлой ночью она плохо спала.','ночью');
+pp([t(`They didn't come `),g(['-',''],46),t(` last Saturday.`)],'(no preposition)','В прошлую субботу они не пришли.','субботу');
+pp([t(`He didn't finish the report `),g(['-',''],46),t(` this afternoon.`)],'(no preposition)','Сегодня днём он не закончил отчёт.','днём');
+pp([t(`We didn't go out `),g(['-',''],46),t(` last weekend.`)],'(no preposition)','В прошлые выходные мы не выходили.','выходные');
+pp([t(`I didn't have breakfast `),g(['-',''],46),t(` this morning.`)],'(no preposition)','Этим утром я не завтракал.','утром');
+pp([t(`She didn't call me `),g(['-',''],46),t(` two days ago.`)],'(no preposition)','Два дня назад она мне не звонила.','назад');
+pp([t(`He didn't read the book `),g(['-',''],46),t(` last year.`)],'(no preposition)','В прошлом году он не читал эту книгу.','году');
+pp([t(`They didn't travel abroad `),g(['-',''],46),t(` last summer.`)],'(no preposition)','Прошлым летом они не путешествовали за рубеж.','летом');
+pp([t(`I didn't go to the gym `),g(['-',''],46),t(` yesterday.`)],'(no preposition)','Вчера я не ходил в спортзал.','Вчера');
+pp([t(`She didn't email him `),g(['-',''],46),t(` this week.`)],'(no preposition)','На этой неделе она ему не писала.','неделе');
+pp([t(`He didn't feel well `),g(['-',''],46),t(` last week.`)],'(no preposition)','На прошлой неделе ему было плохо.','прошлой');
+pp([t(`We didn't meet `),g(['-',''],46),t(` last month.`)],'(no preposition)','В прошлом месяце мы не встречались.','прошлом');
+pp([t(`I didn't buy anything `),g(['-',''],46),t(` yesterday.`)],'(no preposition)','Вчера я ничего не покупал.','Вчера');
+pp([t(`She didn't arrive on time `),g(['-',''],46),t(` this morning.`)],'(no preposition)','Этим утром она не приехала вовремя.','утром');
+
+// ── QUESTION / DIALOGUE (15) ──
+pp([t(`Where were you `),g(['-',''],46),t(` last night?`)],'(no preposition)','Где ты был вчера вечером?','ночью');
+pp([t(`What did you do `),g(['-',''],46),t(` this morning?`)],'(no preposition)','Что ты делал этим утром?','утром');
+dl({A:[t(`When did you last see Tom?`)], B:[t(`I saw him `),g(['-',''],46),t(` yesterday.`)]},'(no preposition)','prep','A: Когда ты последний раз видел Тома?\nB: Я видел его вчера.','вчера');
+dl({A:[t(`Did you sleep well?`)], B:[t(`No, I slept badly `),g(['-',''],46),t(` last night.`)]},'(no preposition)','prep','A: Ты хорошо спал?\nB: Нет, прошлой ночью я плохо спал.','ночью');
+dl({A:[t(`When did they move here?`)], B:[t(`They moved here `),g(['-',''],46),t(` two years ago.`)]},'(no preposition)','prep','A: Когда они сюда переехали?\nB: Они переехали сюда два года назад.','назад');
+dl({A:[t(`Did you read it?`)], B:[t(`Yes, I read it `),g(['-',''],46),t(` this morning.`)]},'(no preposition)','prep','A: Ты это прочитал?\nB: Да, я прочитал это утром.','утром');
+dl({A:[t(`When did she start this job?`)], B:[t(`She started it `),g(['-',''],46),t(` last month.`)]},'(no preposition)','prep','A: Когда она начала эту работу?\nB: Она начала её в прошлом месяце.','прошлом');
+dl({A:[t(`Did you go to the party?`)], B:[t(`Yes! `),g(['-',''],46),t(` last Saturday was so much fun.`)]},'(no preposition)','prep','A: Ты ходил на вечеринку?\nB: Да! В прошлую субботу было так весело.','субботу');
+dl({A:[t(`When did you buy that car?`)], B:[t(`I bought it `),g(['-',''],46),t(` a year ago.`)]},'(no preposition)','prep','A: Когда ты купил ту машину?\nB: Я купил её год назад.','назад');
+dl({A:[t(`Did she call you?`)], B:[t(`Yes, she called me `),g(['-',''],46),t(` this afternoon.`)]},'(no preposition)','prep','A: Она тебе позвонила?\nB: Да, она позвонила мне сегодня днём.','днём');
+dl({A:[t(`When did they open this shop?`)], B:[t(`They opened it `),g(['-',''],46),t(` last year.`)]},'(no preposition)','prep','A: Когда они открыли этот магазин?\nB: Они открыли его в прошлом году.','году');
+dl({A:[t(`When did you arrive?`)], B:[t(`I arrived `),g(['-',''],46),t(` three days ago.`)]},'(no preposition)','prep','A: Когда ты приехал?\nB: Я приехал три дня назад.','назад');
+
+pp([t(`He called the doctor `),g(['-',''],46),t(` yesterday afternoon.`)],'(no preposition)','Вчера днём он позвонил врачу.','днём');
+pp([t(`They opened the café `),g(['-',''],46),t(` last week.`)],'(no preposition)','На прошлой неделе они открыли кафе.','прошлой');
+pp([t(`I forgot my umbrella `),g(['-',''],46),t(` this morning.`)],'(no preposition)','Этим утром я забыл зонтик.','утром');
+
+
+// ─── HINT ACCORDION ──────────────────────────────────────────
+let openHint = null;
+function toggleHint(id){
+  if(openHint && openHint !== id) closeHint(openHint);
+  if(openHint === id){ closeHint(id); return; }
+  openHint = id;
+  document.getElementById('hb-'+id).classList.add('open');
+  document.getElementById('ht-'+id).classList.add('open');
+}
+function closeHint(id){
+  document.getElementById('hb-'+id).classList.remove('open');
+  document.getElementById('ht-'+id).classList.remove('open');
+  if(openHint===id) openHint=null;
+}
+
+// ─── HELPERS ──────────────────────────────────────────────────
+function norm(s){ return s.trim().toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/\s+/g,' '); }
+function shuffle(a){ const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+
+let current=[], roundNum=1, roundCorrect=0, roundWrong=0;
+
+function classify(s){
+  const src = s.dialogue ? s.lines.flatMap(l=>l.parts) : s.parts;
+  const first = src.find(p=>p.k==='g');
+  if(!first) return 'aff';
+  const a0 = first.a[0];
+  if(["don't","doesn't","isn't","aren't","am not","'m not"].some(x=>a0.startsWith(x))||
+     ["do not","does not","is not","are not"].some(x=>a0.startsWith(x))) return 'neg';
+  if(["Do","Does","Is","Are","Am"].includes(a0)) return 'int';
+  return 'aff';
+}
+
+function pickRound(){
+  const pool = DB;
+  return shuffle(pool).slice(0,25);
+}
+
+// ─── RENDER ───────────────────────────────────────────────────
+function makeInputEl(p, idx, gapN){
+  const inp=document.createElement(`input`);
+  inp.type='text'; inp.className='gap'; inp.placeholder='_____';
+  inp.style.width=(p.w||100)+'px';
+  inp.dataset.idx=idx; inp.dataset.gap=gapN;
+  inp.dataset.ans=JSON.stringify(p.a);
+  inp.autocomplete='off'; inp.autocorrect='off'; inp.autocapitalize='none'; inp.spellcheck=false;
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter') checkCard(idx); });
+  return inp;
+}
+
+function buildLine(parts, idx, gapCounter){
+  const line=document.createElement(`div`);
+  line.className='dl';
+  parts.forEach(p=>{
+    if(p.k==='t'){
+      if(!p.v) return;
+      const sp=document.createElement(`span`); sp.className='word'; sp.textContent=p.v;
+      line.appendChild(sp);
+    } else {
+      line.appendChild(makeInputEl(p, idx, gapCounter.n++));
+    }
+  });
+  return line;
+}
+
+function render(){
+  const c=document.getElementById('container');
+  c.innerHTML='';
+  if(current.length===0){
+    c.innerHTML='<div class="empty-msg">Select a topic above ☝️</div>';
+    return;
+  }
+  current.forEach((s,idx)=>{
+    const card=document.createElement(`div`);
+    card.className='sentence-card'; card.id=`card-${idx}`;
+
+    const numEl=document.createElement(`span`);
+    numEl.className='num'; numEl.textContent=idx+1;
+    card.appendChild(numEl);
+
+    const body=document.createElement(`div`);
+    body.className='card-body';
+
+    const gc={n:0}; // shared gap counter
+
+    if(s.dialogue){
+      const dlWrap=document.createElement(`div`);
+      dlWrap.className='dialogue';
+      s.lines.forEach(line=>{
+        const row=buildLine(line.parts, idx, gc);
+        if(line.speaker){
+          const lbl=document.createElement(`span`);
+          lbl.className='sp-label'; lbl.textContent=line.speaker+': ';
+          row.insertBefore(lbl,row.firstChild);
+        }
+        dlWrap.appendChild(row);
+      });
+      body.appendChild(dlWrap);
+    } else {
+      const line=document.createElement(`div`);
+      line.className='sent-line';
+      const gc2={n:0};
+      s.parts.forEach(p=>{
+        if(p.k==='t'){
+          if(!p.v) return;
+          const sp=document.createElement(`span`); sp.className='word'; sp.textContent=p.v;
+          line.appendChild(sp);
+        } else {
+          line.appendChild(makeInputEl(p, idx, gc2.n++));
+        }
+      });
+      body.appendChild(line);
+    }
+
+    // hint
+    const meta=document.createElement(`div`);
+    meta.className='meta-line';
+    if(s.bank!=='prep'){
+      s.hint.split(` — `).forEach((part,pi)=>{
+        if(pi>0){ const sep=document.createElement(`span`); sep.className='hint-base'; sep.textContent=' — '; meta.appendChild(sep); }
+        const m2=part.match(/^(\([^)]+\))\s*(\[[^\]]+\])$/);
+        const m1=part.match(/^(\([^)]+\))$/);
+        if(m2){
+          const b=document.createElement(`span`); b.className='hint-base'; b.textContent=m2[1]; meta.appendChild(b);
+          const r=document.createElement(`span`); r.className='hint-ru'; r.textContent=' '+m2[2]; meta.appendChild(r);
+        } else if(m1){
+          const b=document.createElement(`span`); b.className='hint-base'; b.textContent=m1[1]; meta.appendChild(b);
+        } else {
+          const r=document.createElement(`span`); r.className='hint-ru'; r.textContent=part; meta.appendChild(r);
+        }
+      });
+    }
+    // correction spans — count all gaps
+    const allParts = s.dialogue ? s.lines.flatMap(l=>l.parts) : s.parts;
+    allParts.forEach((p,ci)=>{ if(p.k==='g'){ const cor=document.createElement(`span`); cor.className='correction'; cor.id=`cor-${idx}-${ci}`; meta.appendChild(cor); } });
+    body.appendChild(meta);
+
+    // Translation line for prep sentences
+    if(s.bank==='prep' && s.tr){
+      const trLine=document.createElement('div');
+      trLine.className='sent-translation';
+      const tlines=s.tr.split('\n');
+      tlines.forEach((tl,ti)=>{
+        if(ti>0){ trLine.appendChild(document.createElement('br')); }
+        if(s.trMark && tl.length){
+          // Determine what to highlight:
+          // If trMark starts with "не " → find "не PREP" but only mark the PREP part
+          let findStr=s.trMark;
+          let markStr=s.trMark;
+          if(s.trMark.startsWith('не ')){
+            markStr=s.trMark.slice(3); // e.g. "не в" → mark "в"
+          }
+          // Find findStr in tl as a whole word (Cyrillic word boundary)
+          function isCyrLetter(c){ return c && /[а-яёА-ЯЁ]/u.test(c); }
+          function findWholeWord(str,word){
+            let pos=0;
+            while(pos<=str.length-word.length){
+              const i=str.indexOf(word,pos);
+              if(i===-1) return -1;
+              const before=str[i-1]; const after=str[i+word.length];
+              if(!isCyrLetter(before)&&!isCyrLetter(after)) return i;
+              pos=i+1;
+            }
+            return -1;
+          }
+          const fi=findWholeWord(tl,findStr);
+          if(fi!==-1){
+            // prefix = everything before the mark portion
+            const markStart=fi+(findStr.length-markStr.length);
+            trLine.appendChild(document.createTextNode(tl.slice(0,markStart)));
+            const mk=document.createElement('mark'); mk.textContent=markStr; trLine.appendChild(mk);
+            trLine.appendChild(document.createTextNode(tl.slice(markStart+markStr.length)));
+          } else {
+            // fallback: try just markStr
+            const fi2=findWholeWord(tl,markStr);
+            if(fi2!==-1){
+              trLine.appendChild(document.createTextNode(tl.slice(0,fi2)));
+              const mk=document.createElement('mark'); mk.textContent=markStr; trLine.appendChild(mk);
+              trLine.appendChild(document.createTextNode(tl.slice(fi2+markStr.length)));
+            } else {
+              trLine.appendChild(document.createTextNode(tl));
+            }
+          }
+        } else {
+          trLine.appendChild(document.createTextNode(tl));
+        }
+      });
+      body.appendChild(trLine);
+    }
+
+    card.appendChild(body);
+
+    const btn=document.createElement(`button`);
+    btn.className='btn-check-card'; btn.textContent='Check';
+    btn.id=`btn-${idx}`; btn.onclick=()=>checkCard(idx);
+    card.appendChild(btn);
+
+    c.appendChild(card);
+  });
+
+  document.getElementById('progress').style.width='0%';
+  const res=document.getElementById('result'); res.className='result-box'; res.textContent='';
+  updateChips();
+}
+
+// ─── CHECK ────────────────────────────────────────────────────
+function checkCard(idx){
+  const s=current[idx]; const card=document.getElementById(`card-${idx}`);
+  const btn=document.getElementById(`btn-${idx}`); if(btn.disabled) return;
+  const inputs=card.querySelectorAll('input.gap');
+  let allFilled=true; inputs.forEach(i=>{ const ans=JSON.parse(i.dataset.ans); if(!i.value.trim() && !ans.includes('')) allFilled=false; });
+  if(!allFilled) return;
+  btn.disabled=true;
+
+  const allParts = s.dialogue ? s.lines.flatMap(l=>l.parts) : s.parts;
+  let cardOk=true, inputIdx=0, partIdx=0;
+  allParts.forEach((p,ci)=>{
+    if(p.k!=='g') return;
+    const inp=inputs[inputIdx++];
+    const answers=JSON.parse(inp.dataset.ans);
+    const ok=answers.some(a=>norm(a)===norm(inp.value));
+    inp.disabled=true; inp.classList.remove('correct','wrong');
+    if(ok){ inp.classList.add('correct'); }
+    else {
+      inp.classList.add('wrong'); cardOk=false;
+      const cor=document.getElementById(`cor-${idx}-${ci}`);
+      if(cor){ cor.textContent='→ '+answers[0]; cor.style.display='inline'; }
+    }
+  });
+
+  if(cardOk){ card.classList.add('checked-ok'); roundCorrect++; }
+  else       { card.classList.add('checked-err'); roundWrong++; }
+  updateChips(); updateProgress();
+}
+
+function checkAll(){
+  current.forEach((_,idx)=>{ const b=document.getElementById(`btn-${idx}`); if(!b.disabled) checkCard(idx); });
+  const total=roundCorrect+roundWrong; if(!total) return;
+  const pct=Math.round(roundCorrect/total*100);
+  const res=document.getElementById('result'); res.classList.add('show');
+  if(pct>=80){ res.className='result-box show great'; res.textContent=`Excellent! ${roundCorrect} out of ${total} correct (${pct}%). Press "New Round" to continue.`; }
+  else if(pct>=50){ res.className='result-box show ok'; res.textContent=`Good job! ${roundCorrect} out of ${total} correct (${pct}%). Check the red answers.`; }
+  else { res.className='result-box show poor'; res.textContent=`${roundCorrect} out of ${total} correct (${pct}%). Review the material and try a new round!`; }
+}
+
+function updateChips(){
+  document.getElementById('chip-ok').textContent='✓ '+roundCorrect;
+  document.getElementById('chip-err').textContent='✗ '+roundWrong;
+}
+function updateProgress(){
+  const done=current.filter((_,i)=>document.getElementById(`btn-${i}`).disabled).length;
+  document.getElementById('progress').style.width=Math.round(done/current.length*100)+'%';
+}
+function newRound(){
+  roundNum++; roundCorrect=0; roundWrong=0;
+  document.getElementById('round-num').textContent=roundNum;
+  current=pickRound(); render(); window.scrollTo({top:0,behavior:'smooth'});
+}
+
+current=pickRound(); render();
+
+current=pickRound(); render();
+</script>
+</body>
+</html>
